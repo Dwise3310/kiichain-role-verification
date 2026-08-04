@@ -1,17 +1,16 @@
 import NextAuth from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import Discord from "next-auth/providers/discord";
 import { getGuildMember, getEligibleRoleIds, resolveEligibleRole, discordAvatarUrl } from "@/lib/discord";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
-    DiscordProvider({
+    Discord({
       clientId: process.env.DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
       authorization: { params: { scope: "identify guilds" } },
     }),
   ],
   session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/verify",
     error: "/verify",
@@ -47,7 +46,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         ...session.user,
         discordId: token.discordId as string,
         username: token.username as string,
-        avatarUrl: discordAvatarUrl(token.discordId as string, token.avatarHash as string | null),
+        avatarUrl: discordAvatarUrl(
+          token.discordId as string,
+          token.avatarHash as string | null
+        ),
         isMember: token.isMember as boolean,
         eligibleRole: token.eligibleRole as string | null,
       };
