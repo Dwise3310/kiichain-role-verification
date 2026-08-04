@@ -98,7 +98,7 @@ export default function VerifyClient() {
                     Sign in with the account that&apos;s a member of the official KiiChain server.
                   </p>
                 </div>
-                <button onClick={() => signIn("discord")} className="btn-primary w-full justify-center">
+                <button onClick={() => signIn("discord", { redirectTo: "/verify" })} className="btn-primary w-full justify-center">
                   Connect Discord
                 </button>
               </GlassCard>
