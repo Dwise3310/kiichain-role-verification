@@ -3,6 +3,7 @@ import Discord from "next-auth/providers/discord";
 import { getGuildMember, getEligibleRoleIds, resolveEligibleRole, discordAvatarUrl } from "@/lib/discord";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   providers: [
     Discord({
       clientId: process.env.DISCORD_CLIENT_ID!,
