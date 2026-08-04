@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  scrollbar-color: rgba(179, 136, 255, 0.35) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #08060d;
+  color: #f5f3fa;
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply relative rounded-xl2 border border-line bg-plum/60 backdrop-blur-xl;
+  }
+
+  .glass-card {
+    @apply glass-panel shadow-panel;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-violet px-7 py-3.5
+      font-semibold text-mist shadow-glow transition-all duration-300
+      hover:shadow-glow hover:bg-violet-soft hover:-translate-y-0.5
+      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-glow
+      disabled:opacity-40 disabled:pointer-events-none disabled:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white/[0.03] px-6 py-3
+      text-sm text-mist/80 transition-all duration-300 hover:border-violet-soft/50 hover:text-mist
+      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-glow;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.28em] text-violet-soft/70;
+  }
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
